@@ -1,8 +1,11 @@
 export const getRevenue = async () => {
   try {
-    const res = await fetch('http://localhost:3000/api/Revenue', {
-      cache: 'no-store',
-    });
+    const res = await fetch(
+      'https://financial-dashboard-ebon.vercel.app/api/Revenue',
+      {
+        cache: 'no-store',
+      }
+    );
 
     if (!res.ok) {
       throw new Error('Failed to fetch topics');
@@ -16,9 +19,12 @@ export const getRevenue = async () => {
 
 export const fetchLatestInvoices = async () => {
   try {
-    const res = await fetch('http://localhost:3000/api/Invoices', {
-      cache: 'no-store',
-    });
+    const res = await fetch(
+      'https://financial-dashboard-ebon.vercel.app/api/Invoices',
+      {
+        cache: 'no-store',
+      }
+    );
 
     if (!res.ok) {
       throw new Error('Failed to fetch topics');
@@ -32,9 +38,12 @@ export const fetchLatestInvoices = async () => {
 
 export const fetchCardsData = async () => {
   try {
-    const res = await fetch('http://localhost:3000/api/Cards', {
-      cache: 'no-store',
-    });
+    const res = await fetch(
+      'https://financial-dashboard-ebon.vercel.app/api/Cards',
+      {
+        cache: 'no-store',
+      }
+    );
     if (!res.ok) {
       throw new Error('Failed to fetch topics');
     }
