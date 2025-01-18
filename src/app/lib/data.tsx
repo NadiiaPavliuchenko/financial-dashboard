@@ -1,4 +1,5 @@
 import { connectToDatabase } from '../api/db';
+import Customer from '../models/Customer';
 import Invoice from '../models/Invoice';
 
 const BASE_URL = 'http://localhost:3000';
@@ -165,5 +166,26 @@ export async function fetchInvoicesPages(query: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch total number of invoices.');
+  }
+}
+
+export async function fetchCustomers() {
+  try {
+    const customers = await Customer.find({}).sort({ name: 1 });
+    return customers;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch all customers.');
+  }
+}
+
+export async function fetchInvoiceById(id: string) {
+  try {
+    await connectToDatabase();
+    const invoice = await Invoice.findById({ _id: id });
+    return invoice;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch invoice by id.');
   }
 }

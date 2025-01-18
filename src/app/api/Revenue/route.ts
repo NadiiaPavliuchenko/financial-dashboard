@@ -17,16 +17,6 @@ export async function GET() {
   }
 }
 
-// export async function fetchCustomers() {
-//   try {
-//     const customers = await Customer.find({}).sort({ name: 1 }).exec();
-//     return customers;
-//   } catch (err) {
-//     console.error('Database Error:', err);
-//     throw new Error('Failed to fetch all customers.');
-//   }
-// }
-
 // export async function fetchFilteredCustomers(query: string) {
 //   try {
 //     const customers = await Customer.aggregate([

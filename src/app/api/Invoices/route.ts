@@ -19,21 +19,3 @@ export async function GET() {
     return NextResponse.json({ message: 'Error', error }, { status: 500 });
   }
 }
-
-// export async function fetchInvoiceById(_id: string) {
-//   try {
-//     const invoice = await Invoice.findById(_id).exec();
-
-//     if (!invoice) {
-//       throw new Error('Invoice not found');
-//     }
-
-//     return {
-//       ...invoice.toObject(),
-//       amount: invoice.amount / 100,
-//     };
-//   } catch (error) {
-//     console.error('Database Error:', error);
-//     throw new Error('Failed to fetch invoice.');
-//   }
-// }
