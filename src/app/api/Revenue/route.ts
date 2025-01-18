@@ -2,8 +2,6 @@ import { connectToDatabase } from '../db';
 import Revenue from '../../models/Revenue';
 import { NextResponse } from 'next/server';
 
-// const ITEMS_PER_PAGE = 6;
-
 export async function GET() {
   try {
     await connectToDatabase();
@@ -18,89 +16,6 @@ export async function GET() {
     return NextResponse.json({ message: 'Error', error }, { status: 500 });
   }
 }
-
-// export async function fetchLatestInvoices() {
-//   try {
-//     const latestInvoices = await Invoice.find({})
-//       .sort({ date: -1 })
-//       .limit(5)
-//       .populate('customer_id', 'name email image_url')
-//       .exec();
-
-//     return latestInvoices.map((invoice) => ({
-//       ...invoice.toObject(),
-//       amount: formatCurrency(invoice.amount),
-//     }));
-//   } catch (error) {
-//     console.error('Database Error:', error);
-//     throw new Error('Failed to fetch the latest invoices.');
-//   }
-// }
-
-// export async function fetchFilteredInvoices(
-//   query: string,
-//   currentPage: number
-// ) {
-//   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-
-//   try {
-//     const invoices = await Invoice.find({
-//       $or: [
-//         { 'customer.name': { $regex: query, $options: 'i' } },
-//         { 'customer.email': { $regex: query, $options: 'i' } },
-//         { amount: { $regex: query, $options: 'i' } },
-//         { date: { $regex: query, $options: 'i' } },
-//         { status: { $regex: query, $options: 'i' } },
-//       ],
-//     })
-//       .skip(offset)
-//       .limit(ITEMS_PER_PAGE)
-//       .populate('customer_id', 'name email image_url')
-//       .exec();
-
-//     return invoices;
-//   } catch (error) {
-//     console.error('Database Error:', error);
-//     throw new Error('Failed to fetch invoices.');
-//   }
-// }
-
-// export async function fetchInvoicesPages(query: string) {
-//   try {
-//     const count = await Invoice.countDocuments({
-//       $or: [
-//         { 'customer.name': { $regex: query, $options: 'i' } },
-//         { 'customer.email': { $regex: query, $options: 'i' } },
-//         { amount: { $regex: query, $options: 'i' } },
-//         { date: { $regex: query, $options: 'i' } },
-//         { status: { $regex: query, $options: 'i' } },
-//       ],
-//     });
-
-//     return Math.ceil(count / ITEMS_PER_PAGE);
-//   } catch (error) {
-//     console.error('Database Error:', error);
-//     throw new Error('Failed to fetch total number of invoices.');
-//   }
-// }
-
-// export async function fetchInvoiceById(_id: string) {
-//   try {
-//     const invoice = await Invoice.findById(_id).exec();
-
-//     if (!invoice) {
-//       throw new Error('Invoice not found');
-//     }
-
-//     return {
-//       ...invoice.toObject(),
-//       amount: invoice.amount / 100,
-//     };
-//   } catch (error) {
-//     console.error('Database Error:', error);
-//     throw new Error('Failed to fetch invoice.');
-//   }
-// }
 
 // export async function fetchCustomers() {
 //   try {
