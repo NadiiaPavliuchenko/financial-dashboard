@@ -117,3 +117,53 @@ export async function fetchFilteredInvoices(
     throw new Error('Failed to fetch invoices.');
   }
 }
+
+export async function fetchInvoicesPages(query: string) {
+  try {
+    const count = await Invoice.countDocuments([
+      {
+        $lookup: {
+          from: 'customers',
+          localField: 'customer_id',
+          foreignField: '_id',
+          as: 'customer',
+        },
+      },
+      {
+        $unwind: '$customer',
+      },
+      {
+        $match: {
+          $or: [
+            { 'customer.name': { $regex: query, $options: 'i' } },
+            { 'customer.email': { $regex: query, $options: 'i' } },
+            {
+              $expr: {
+                $regexMatch: {
+                  input: { $toString: '$amount' },
+                  regex: query,
+                  options: 'i',
+                },
+              },
+            },
+            {
+              $expr: {
+                $regexMatch: {
+                  input: { $toString: '$date' },
+                  regex: query,
+                  options: 'i',
+                },
+              },
+            },
+            { status: { $regex: query, $options: 'i' } },
+          ],
+        },
+      },
+    ]);
+
+    return Math.ceil(count / ITEMS_PER_PAGE);
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of invoices.');
+  }
+}

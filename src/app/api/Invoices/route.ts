@@ -20,25 +20,6 @@ export async function GET() {
   }
 }
 
-// export async function fetchInvoicesPages(query: string) {
-//   try {
-//     const count = await Invoice.countDocuments({
-//       $or: [
-//         { 'customer.name': { $regex: query, $options: 'i' } },
-//         { 'customer.email': { $regex: query, $options: 'i' } },
-//         { amount: { $regex: query, $options: 'i' } },
-//         { date: { $regex: query, $options: 'i' } },
-//         { status: { $regex: query, $options: 'i' } },
-//       ],
-//     });
-
-//     return Math.ceil(count / ITEMS_PER_PAGE);
-//   } catch (error) {
-//     console.error('Database Error:', error);
-//     throw new Error('Failed to fetch total number of invoices.');
-//   }
-// }
-
 // export async function fetchInvoiceById(_id: string) {
 //   try {
 //     const invoice = await Invoice.findById(_id).exec();
