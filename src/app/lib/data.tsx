@@ -183,9 +183,13 @@ export async function fetchInvoiceById(id: string) {
   try {
     await connectToDatabase();
     const invoice = await Invoice.findById({ _id: id });
+
+    if (!invoice) {
+      return [];
+    }
     return invoice;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoice by id.');
+    return [];
   }
 }

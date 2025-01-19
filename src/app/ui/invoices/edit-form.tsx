@@ -1,6 +1,5 @@
 'use client';
 
-import { CustomerField, InvoiceForm } from '@/app/lib/definitions';
 import {
   CheckIcon,
   ClockIcon,
@@ -10,15 +9,20 @@ import {
 import Link from 'next/link';
 import { Button } from '@/app/ui/button';
 import { editInvoice } from '@/app/lib/actions';
+import { CustomerField } from '@/app/lib/definitions';
 
 export default function EditInvoiceForm({
   invoice,
   customers,
 }: {
-  invoice: InvoiceForm;
-  customers: CustomerField[];
+  invoice: string;
+  customers: string;
 }) {
-  const editInvoiceWithId = editInvoice.bind(null, invoice._id);
+  const simpleInvoice = JSON.parse(invoice);
+  const simpleCustomers = JSON.parse(customers);
+
+  const editInvoiceWithId = editInvoice.bind(null, simpleInvoice._id);
+
   return (
     <form action={editInvoiceWithId}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
@@ -32,12 +36,12 @@ export default function EditInvoiceForm({
               id="customer"
               name="customerId"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              defaultValue={invoice.customer_id}
+              defaultValue={simpleInvoice.customer_id}
             >
               <option value="" disabled>
                 Select a customer
               </option>
-              {customers.map((customer) => (
+              {simpleCustomers.map((customer: CustomerField) => (
                 <option key={customer._id} value={customer._id}>
                   {customer.name}
                 </option>
@@ -59,7 +63,7 @@ export default function EditInvoiceForm({
                 name="amount"
                 type="number"
                 step="0.01"
-                defaultValue={invoice.amount}
+                defaultValue={simpleInvoice.amount}
                 placeholder="Enter USD amount"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
@@ -81,7 +85,7 @@ export default function EditInvoiceForm({
                   name="status"
                   type="radio"
                   value="pending"
-                  defaultChecked={invoice.status === 'pending'}
+                  defaultChecked={simpleInvoice.status === 'pending'}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label
@@ -97,7 +101,7 @@ export default function EditInvoiceForm({
                   name="status"
                   type="radio"
                   value="paid"
-                  defaultChecked={invoice.status === 'paid'}
+                  defaultChecked={simpleInvoice.status === 'paid'}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label

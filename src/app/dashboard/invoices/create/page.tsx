@@ -5,11 +5,6 @@ import { fetchCustomers } from '@/app/lib/data';
 export default async function Page() {
   const customers = await fetchCustomers();
   const simpleCustomers = JSON.stringify(customers);
-  //   const simpleCustomers = customers.map(({ _id, name }) => ({
-  //     _id,
-  //     name,
-  //   }));
-  //   console.log(simpleCustomers);
 
   return (
     <main>
