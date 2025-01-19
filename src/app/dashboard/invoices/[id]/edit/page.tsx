@@ -13,8 +13,6 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
   if (invoice.length === 0) {
     notFound();
   }
-  const simpleCustomers = JSON.stringify(customers);
-  const simpleInvoice = JSON.stringify(invoice);
 
   return (
     <main>
@@ -28,7 +26,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
           },
         ]}
       />
-      <Form invoice={simpleInvoice} customers={simpleCustomers} />
+      <Form invoice={invoice} customers={customers} />
     </main>
   );
 }
