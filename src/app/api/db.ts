@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import Revenue from '../models/Revenue';
+import User from '../models/User';
+import bcrypt from 'bcryptjs';
 
 export async function connectToDatabase() {
   try {
@@ -13,7 +14,6 @@ export async function connectToDatabase() {
     }
     const db = await mongoose.connect(mongoUri);
 
-    console.log('Connected to MongoDB');
     return db;
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
